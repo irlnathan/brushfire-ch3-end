@@ -61,14 +61,18 @@
         </div>
       </nav>
       <!-- SUBMIT NEW VIDEO -->
-      <section class="submit-video-form col-md-4">
+      <section class="the-submit-video-form col-md-4">
         <h3>See something missing?</h3>
-        <form>
-          <input class="form-control" type="text" name="title" placeholder="e.g.
-          My video title"/>
-          <input class="form-control" type="text" name="src"
-          placeholder="e.g. https://www.youtube.com/watch?v=5O434MiRBoY"/>
-          <button class="btn btn-success" >Submit Video</button>
+        <form ng-submit="submitNewVideo()">
+          <input class="form-control" type="text"
+          ng-model="newVideoTitle" ng-disabled="busySubmittingVideo" name="title"
+          placeholder="e.g. My video title"/>
+          <input class="form-control" type="text" ng-model="newVideoSrc"
+          ng-disabled="busySubmittingVideo" name="src"
+          placeholder="e.g. https://www.youtube.com/embed/Kdgt1ZHkvnM"/>
+          <button class="btn btn-success" type="submit"
+          ng-disabled="busySubmittingVideo">{{busySubmittingVideo?'Submitting...':'Submit Video'}}
+          </button>
         </form>
       </section>
       <!-- LIST OF VIDEOS -->
