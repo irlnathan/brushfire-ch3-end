@@ -1,4 +1,8 @@
-$(function whenDomIsReady(){
+$(function whenDomIsReady() {
+
+  //
+  // Immediately bind a "submit" event on our "Submit Video" form.
+  //
 
   $('.submit-video-form').submit(function (e){
 
@@ -65,9 +69,21 @@ $(function whenDomIsReady(){
 
   });
 
+
+  //
+  // Immediately start fetching list of videos from the server.
+  //
+
+  // First, show a loading spinner
   $('.the-list-of-videos .loading').show();
 
+  // Then simulate a delay
+  // (TODO: actually fetch videos from server instead of pretending)
   setTimeout(function afterRetrievingVideos() {
+
+    // TODO: handle error state from the server
+
+    // Fake data (TODO: use the real data from the server instead of pretending)
     var videos = [{
       title: 'PSY - GANGNAM STYLE (강남스타일) M/V',
       src: 'https://www.youtube.com/embed/9bZkp7q19f0'
@@ -79,9 +95,15 @@ $(function whenDomIsReady(){
       src: 'https://www.youtube.com/embed/_OBlgSz8sSM'
     }];
 
+    // Hide the loading spinner:
     $('.the-list-of-videos .loading').hide();
 
-    var videosHtml = _.reduce(videos, function(html, video){
+    // Prepare the HTML (<li> elements) for our videos
+    var videosHtml = _.reduce(videos, function(html, video) {
+
+      // Note: this approach is just an example-- you should be HTML-escaping things
+      // or better yet, using a more structured front-end web framework on top of (or in lieu of)
+      // jQuery.
       html += '<li class="video">' +
         '  <h2>' + video.title + '</h2>' +
         '  <iframe width="640" height="390" src="' + video.src + '" frameborder="0" allowfullscreen></iframe>' +
@@ -89,7 +111,8 @@ $(function whenDomIsReady(){
       return html;
     }, '');
 
+    // Stick the videos into the DOM
     $('.the-list-of-videos ul').replaceWith(videosHtml);
 
-  }, 750); 
+  }, 750);
 });
